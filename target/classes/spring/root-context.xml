@@ -6,20 +6,21 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
 	<!-- 
 		root-context.xml 파일
 		- web.xml 파일에서 가장 먼저 읽어들이는 설정 파일.
 		- 프로젝트 전반적으로 사용되는 자원을 생성(bean 등록)하고 설정하는 파일
-		- DB연결 관련된 정보, 트랜잭션 처리, 파일 업로드 등을 작성
+		- DB 연결 관련 정보, 트랜잭션 처리, 파일 업로드 등을 작성
 	 -->
-	 
-	 <!-- 1. DBCP 사용을 위한 DataSource를 bean으로 등록 -->
-	 <!-- DataSource: java에서 Connection Pool을 지원하기 위한 인터페이스(Connection 상위호환) -->
-	 <!-- destroy-method="close": 주어진 세션을 자동으로 반환(close)하는 설정 -->
-	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-	 	
-	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	
+	
+	<!-- 1. DBCP 사용을 위한 DataSource를 bean 등록 -->
+	
+	<!-- DataSource : java에서 Connection Pool을 지원하기 위한 인터페이스(Connection 상위호환) -->
+	<!-- destroy-method="close" : 주어진 세션을 자동으로 반환(close)하는 설정 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="community"/>
 		<property name="password" value="1234"/>
@@ -33,13 +34,16 @@
 		<property name="maxIdle" value="20" /> <!-- 유휴 상태로 존재할 수 있는 커넥션 최대 수, 기본 8 -->
 		<property name="minIdle" value="10" /> <!-- 유휴 상태로 존재할 수 있는 커넥션 최소 수, 기본 0 -->
 		<property name="maxWaitMillis" value="-1" /> <!-- 예외 발생 전 커넥션이 반환 될 떄 까지 대기하는 최대 시간(ms), 기본 -1(무기한) -->
+	</bean>
 	
-	 </bean>
-	 
-	 <!-- SqlSession : sql구문을 DB에 전달, 실행하는 객체 
-			SqlSessionFactory : SqlSession을 만드는 객체 
-			sqlSessionFactoryBean : mybatis 설정 파일(mybatis-config.xml)과 Connection Pool 정보를 이용하여 SqlSessionFactory를 만드는 객체 
-			sqlSessionTemplate : SqlSession 객체에 트랜잭션 처리 역할이 가능하도록 하는 객체 -->
+	
+	
+	<!-- MyBatis 관련 Bean 생성 -->
+	
+	<!-- SqlSession : sql구문을 DB에 전달, 실행하는 객체 
+		SqlSessionFactory : SqlSession을 만드는 객체 
+		sqlSessionFactoryBean : mybatis 설정 파일(mybatis-config.xml)과 Connection Pool 정보를 이용하여 SqlSessionFactory를 만드는 객체 
+		sqlSessionTemplate : SqlSession 객체에 트랜잭션 처리 역할이 가능하도록 하는 객체 -->
 
 	<!-- 마이바티스 SqlSession 등록하기 (xml 방식으로 bean 등록) -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -59,7 +63,10 @@
 	</bean>
 
 	
-<!-- 	<tx:annotation-driven proxy-target-class="true"/> -->
+	<!-- 	<tx:annotation-driven proxy-target-class="true"/> -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	
+	
 	
 </beans>

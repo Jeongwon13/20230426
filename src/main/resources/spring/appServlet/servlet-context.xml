@@ -15,27 +15,28 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!--
+
+	<!--  
 		servlet-context.xml 파일
 		
 		- DispatcherServlet의 설정파일
 		- 모든 요청을 받아서 Controller 찾고, 응답에 따라 View를 찾아서 연결
-		
+	
 		* HandlerMapping: 요청받은 주소에 따라 해당 주소를 처리할 컨트롤러를 연결하는 역할
 			-> 기존에 XML 방식을 사용하다
-			@RequestMapping/ @GetMapping / @PostMapping으로 대체됨
+		@RequestMapping / @GetMapping / @PostMapping으로 대체됨
 	
-	"/WEB-INF/views/member/signUp.jsp" -->
+	-->
 
-	<!-- View Resolver :
+	<!--  View Resolver : 
 		- Controller에서 반환된 문자열 앞/뒤에 prefix/suffix를 추가하여
 			만들어진 경로의 jsp로 요청 위임(forward)
-			
-		/WEB-INF/views/ prefix  member/signUp   .jsp  suffix 
+		
+			/WEB-INF/views/member/signUp.jsp
 	
-		단, 반환된 문자열의 시작이 redirect: 구문이면 재요청(redirect) 진행
-	
+		단, 반환된 문자열의 시작이 redirect:  구문이면 재요청(redirect) 진행
 	 -->
+
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -44,10 +45,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- 지정된 패키지 이하에 존재하는
+	<!-- 지정된 패키지 이하에 존재하는 
 		@Component, @Controller, @Service, @Repository를 찾아서 bean으로 생성
-	 -->
-	 
+	-->
 	<context:component-scan base-package="edu.kh.comm" />
 	
 	

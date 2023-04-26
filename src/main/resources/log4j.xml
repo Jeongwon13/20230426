@@ -33,9 +33,10 @@
 		</layout>
 	</appender>
 	
+	
 	<!-- Application Loggers -->
 	<logger name="edu.kh.comm">
-		<!-- trace < debug < info < warn < error < fatal -->
+		<!--  trace < debug < info < warn < error < fatal -->
 		<level value="debug" />
 	</logger>
 	

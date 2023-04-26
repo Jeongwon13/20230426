@@ -7,14 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	
 	/*
-	 * http://localhost/8080/comm/main <- 목표경로
+	 * http://localhost:8080/comm/main
+	 * http://localhost:8080/comm/
 	 * 
-	 */
+	 * */
+	
 	
 	@RequestMapping("/main")
 	public String mainForward() {
+		
 		return "common/main";
+		
 	}
-	
-	
 }
